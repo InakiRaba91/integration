@@ -33,13 +33,6 @@ class IntegralApproximation(Scene):
             # Add labels below the x-axis
             label = Tex(f"x={x_alias}").set_color(RED).scale(0.75).next_to(axes.c2p(x, 0), DOWN)
             self.add(label)
-        
-        # Add text label indicating the area under the curve is the integral of f(x)
-        integral_text = Tex(r"A(x) = \int_{a}^{b} f(x) \, dx")
-        integral_text.set_color(GREEN)
-        integral_text.scale(0.75)
-        integral_text.to_edge(6*UP)
-        self.add(integral_text)
 
         # Initial dx value
         dx = 0.5
@@ -69,6 +62,15 @@ class IntegralApproximation(Scene):
             stroke_background=False
         )
         self.play(ShowCreation(final_rectangles))
+        self.wait(1)
+
+        # Add text label indicating the area under the curve is the integral of f(x)
+        integral_text = Tex(r"A(x) = \int_{a}^{b} f(x) \, dx")
+        integral_text.set_color(GREEN)
+        integral_text.scale(0.75)
+        integral_text.to_edge(6*UP)
+        integral_rect = SurroundingRectangle(integral_text, color=GREEN)
+        self.play(Write(integral_text), ShowCreation(integral_rect))
         self.wait(2)
 
 # To render the scene, run the following command in your terminal:

@@ -23,13 +23,6 @@ class DerivativeApproximation(Scene):
         # Add axes, graph, and labels to the scene
         self.add(axes, graph, labels)
 
-        # Add text label indicating the derivative approximation
-        derivative_text = Tex(r"s(x) = \lim_{{\Delta x \to 0}} \frac{{f(x + \Delta x) - f(x)}}{{\Delta x}}")
-        derivative_text.set_color(GREEN)
-        derivative_text.scale(0.75)
-        derivative_text.to_edge(5*UP)
-        self.add(derivative_text)
-
         # Initial dx value
         dx = 1.
         x0 = 2.  # Point at which to approximate the derivative
@@ -98,6 +91,16 @@ class DerivativeApproximation(Scene):
             stroke_width=5,
         )
         self.play(ShowCreation(final_tangent_line), FadeIn(final_point_f_x), FadeIn(final_point_f_x_dx), FadeIn(label_f_x0), ShowCreation(final_line_x0_dx))
+        self.wait(1)
+        
+        # Add text label indicating the derivative approximation
+        derivative_text = Tex(r"s(x) = \lim_{{\Delta x \to 0}} \frac{{f(x + \Delta x) - f(x)}}{{\Delta x}}")
+        derivative_text.set_color(GREEN)
+        derivative_text.scale(0.75)
+        derivative_text.to_edge(4.5*UP)
+        self.add(derivative_text)
+        derivative_rect = SurroundingRectangle(derivative_text, color=GREEN)
+        self.play(Write(derivative_text), ShowCreation(derivative_rect))
         self.wait(2)
 
 # To render the scene, run the following command in your terminal:
