@@ -5,7 +5,7 @@ class DifferentiatingArea(Scene):
         # Define the function
         def func(x):
             return 2+0.5*x*(x-1)*(x-2)
-        a = 0.5
+        x0 = 0.5
         x = 3
 
         # Create axes
@@ -18,8 +18,8 @@ class DifferentiatingArea(Scene):
         # Add axes, graph, and labels to the scene
         self.add(axes, graph, f_text)
         limit = DashedLine(
-            start=axes.c2p(a, 0),
-            end=axes.c2p(a, func(a)),
+            start=axes.c2p(x0, 0),
+            end=axes.c2p(x0, func(x0)),
             dash_length=0.1,
             color=RED,
             stroke_width=7,
@@ -27,7 +27,7 @@ class DifferentiatingArea(Scene):
         self.add(limit)
         
         # Add labels below the x-axis
-        label = Tex(f"a").set_color(RED).scale(0.75).next_to(axes.c2p(a, 0), DOWN)
+        label = Tex(f"x_0").set_color(RED).scale(0.75).next_to(axes.c2p(x0, 0), DOWN)
         self.add(label)
                 
         # Draw Riemann rectangles
@@ -56,7 +56,7 @@ class DifferentiatingArea(Scene):
 
             rectangles = axes.get_riemann_rectangles(
                 graph,
-                x_range=(a, b),
+                x_range=(x0, b),
                 dx=dx,
                 colors=colors,
                 fill_opacity=fill_opacity,
